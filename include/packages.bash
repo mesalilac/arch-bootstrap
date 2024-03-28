@@ -8,6 +8,7 @@ export PACMAN_PACKAGES=(
     "seahorse"
     "xtrlock"
     "gnome-keyring"
+    "polkit-gnome"
     "gpick"
     "playerctl"
     "cmake"
