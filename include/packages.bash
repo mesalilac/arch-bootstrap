@@ -1,4 +1,5 @@
 # TODO: add all packages from debian-packages.sh
+# TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
     "python-pipx"
     "python-black"
@@ -234,6 +235,7 @@ export AUR_PACKAGES=(
     "pfetch"
     "lf-bin"
     "smenu"
+    "ssmtp"
     "code-marketplace"
     "spaceship-prompt-git"
     "spotify"
