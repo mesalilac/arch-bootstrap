@@ -25,27 +25,10 @@ export PACMAN_PACKAGES=(
     #
     # fonts
     #
-    "ttf-mononoki-git"
 
     # Fix: Steam no text
     "lib32-fontconfig"
-    "ttf-liberation"
-    "wqy-zenhei"
     # END
-
-    #"ttc-iosevka"
-    #"ttf-fantasque-sans-mono"
-    #"ttf-fira-code"
-    #"noto-fonts"
-    #"noto-fonts-emoji"
-    #"noto-fonts-cjk"
-    #"ttf-jetbrains-mono"
-    #"ttf-joypixels"
-    #"ttf-font-awesome"
-    #"rxvt-unicode"
-    #"terminus-font"
-    #"ttf-dejavu"
-    #"ttf-droid"
 
     #
     # virt
