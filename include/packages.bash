@@ -151,7 +151,6 @@ export PACMAN_PACKAGES=(
     #
     "tree"
     "dust"
-    # "dbeaver"
     "tmux"
     "onboard"
     "github-cli"
