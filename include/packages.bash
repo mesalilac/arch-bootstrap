@@ -201,7 +201,6 @@ export PACMAN_PACKAGES=(
     "xbindkeys"
     "imwheel"
     "gnome-system-monitor"
-    # "awesome"
     "picom"
     "transmission-gtk"
 )
