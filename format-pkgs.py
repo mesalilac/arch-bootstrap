@@ -26,6 +26,12 @@ class State:
     current_array: CurrentArray = field(default=CurrentArray.NONE)
 
 
+@dataclass
+class Packages:
+    pacman: List[Package] = field(default_factory=list)
+    aur: List[Package] = field(default_factory=list)
+
+
 def get_pacman_pkg_info(package: Package):
     ...
 
@@ -70,9 +76,8 @@ def parse_line(line: str) -> Package:
     return package
 
 
-def parse_file():
-    pacman_packages: List[Package] = []
-    aur_packages: List[Package] = []
+def parse_file() -> Packages:
+    packages = Packages()
 
     with open("./include/packages.bash", "r") as f:
         state: State = State()
@@ -97,21 +102,21 @@ def parse_file():
             ):
                 package = parse_line(line)
                 if state.current_array == CurrentArray.PACMAN:
-                    pacman_packages.append(package)
+                    packages.pacman.append(package)
                 elif state.current_array == CurrentArray.AUR:
-                    aur_packages.append(package)
+                    packages.aur.append(package)
 
-    return pacman_packages, aur_packages
+    return packages
 
 
 def main():
-    pacman_packages, aur_packages = parse_file()
+    packages = parse_file()
 
-    print("pacman_packages:", pacman_packages)
-    print("len pacman_packages:", len(pacman_packages))
+    print("pacman_packages:", packages.pacman)
+    print("len pacman_packages:", len(packages.pacman))
 
-    print("aur:", aur_packages)
-    print("len aur_packages:", len(aur_packages))
+    print("aur:", packages.aur)
+    print("len aur_packages:", len(packages.aur))
 
 
 if __name__ == "__main__":
