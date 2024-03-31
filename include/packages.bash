@@ -234,4 +234,5 @@ export AUR_PACKAGES=(
     "betterdiscord-installer-bin"
     "icons-in-terminal"
     "inxi"
+    "artha"
 )
