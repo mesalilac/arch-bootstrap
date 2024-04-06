@@ -134,6 +134,7 @@ export PACMAN_PACKAGES=(
     #
     # themes
     #
+    "qt5ct"
     "lxappearance"
     "lxappearance-obconf"
     "papirus-icon-theme"
