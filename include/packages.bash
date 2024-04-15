@@ -1,6 +1,8 @@
 # TODO: add all packages from debian-packages.sh
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
+    "go"
+    "go-tools"
     "screenkey"
     "python-pipx"
     "python-black"
