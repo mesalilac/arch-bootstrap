@@ -41,7 +41,6 @@ export PACMAN_PACKAGES=(
     "virt-viewer"
     "libvirt"
     "qemu"
-    "qemu-arch-extra"
     #
     # edit meta data
     #
@@ -171,7 +170,7 @@ export PACMAN_PACKAGES=(
     "network-manager-applet"
     "dhcpcd"
     "redis"
-    "nodejs-lts-gallium"
+    "nodejs-lts-iron"
     "man-db"
     "docker"
     "dnsmasq"
@@ -239,5 +238,4 @@ export AUR_PACKAGES=(
     "betterdiscord-installer-bin"
     "icons-in-terminal"
     "inxi"
-    "artha"
 )
