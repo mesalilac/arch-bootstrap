@@ -138,6 +138,9 @@ yarn global add sass
 yarn global add bash-language-server
 
 pipx install discover-overlay
+pipx install identify
+
+curl -sS https://starship.rs/install.sh | sh
 
 if [[ ! -d "${HOME}/.tmux/plugins/tpm" ]] ; then
     mkdir -p "${HOME}/.tmux/plugins"
