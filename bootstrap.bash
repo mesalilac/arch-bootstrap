@@ -12,7 +12,7 @@ fi
 . "include/log.bash"
 . "include/packages.bash"
 
-DOTFILES_REPO_URL="https://github.com/MesaBytes/dotfiles"
+DOTFILES_REPO_URL="https://github.com/mesalilac/dotfiles"
 DOTFILES_DIR="${HOME}/.dotfiles"
 
 function pause_execution {
@@ -37,7 +37,7 @@ EOF
 echo -e "$NO_COLOR"
 
 echo -e "arch bootstrap script"
-echo -e "repo: https://github.com/MesaBytes/arch-bootstrap"
+echo -e "repo: https://github.com/mesalilac/arch-bootstrap"
 
 pause_execution
 
@@ -121,7 +121,7 @@ log_info "Installing cargo packages"
 cargo install sccache
 cargo install stylua
 cargo install tree-sitter-cli
-cargo install --git https://github.com/MesaBytes/cmus-rpc.git
+cargo install --git https://github.com/mesalilac/cmus-rpc.git
 cargo install du-dust
 cargo install diesel_cli
 cargo install bat
