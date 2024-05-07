@@ -23,7 +23,6 @@ export PACMAN_PACKAGES=(
     "font-manager"
     "arandr"
     "udiskie"
-    "thunderbird"
     # xorg stuff
     "xorg"
     "xorg-xinit"
