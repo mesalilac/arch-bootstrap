@@ -57,6 +57,12 @@ mkdir -pv ~/.local/bin/app-images
 # -----------------------------------------------------------
 
 # -----------------------------------------------------------
+log_info "Enabling multilib"
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+
+log_info "Enabling parallel downloads"
+sed -i "/^#ParallelDownloads/"'s/^#//' /etc/pacman.conf
+
 # TODO: Check if PACMAN_PACKAGES array is empty or not set
 log_info "Downloading pacman packages"
 sudo pacman -Syu --noconfirm --needed "${PACMAN_PACKAGES[@]}"
@@ -84,7 +90,7 @@ yay -S --noconfirm --sudoloop --needed "${AUR_PACKAGES[@]}"
 # -----------------------------------------------------------
 git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}"
 cd "${DOTFILES_DIR}"
-./restore.py
+./restore
 cd "${HOME}"
 # -----------------------------------------------------------
 
@@ -113,6 +119,9 @@ chmod +x ~/.local/bin/vimv
 # -----------------------------------------------------------
 log_info "Installing rust"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+export PATH="${HOME}/.cargo/bin:${PATH}"
+
 # -----------------------------------------------------------
 
 # -----------------------------------------------------------
