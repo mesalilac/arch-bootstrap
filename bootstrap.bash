@@ -63,6 +63,8 @@ sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 log_info "Enabling parallel downloads"
 sed -i "/^#ParallelDownloads/"'s/^#//' /etc/pacman.conf
 
+sudo pacman -Syyu --noconfirm
+
 # TODO: Check if PACMAN_PACKAGES array is empty or not set
 log_info "Downloading pacman packages"
 sudo pacman -Syu --noconfirm --needed "${PACMAN_PACKAGES[@]}"
