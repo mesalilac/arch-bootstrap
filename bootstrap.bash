@@ -179,6 +179,17 @@ cd lua-language-server
 ./make.sh
 
 cd ..
+
+if [[ ! -d "picom" ]] ; then
+    git clone https://github.com/jonaburg/picom
+fi
+cd picom
+meson --buildtype=release . build
+ninja -C build
+# To install the binaries in /usr/local/bin (optional)
+sudo ninja -C build install
+
+cd ..
 # -----------------------------------------------------------
 
 # ____________________________________________________________

@@ -1,6 +1,7 @@
 # TODO: add all packages from debian-packages.sh
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
+    "uthash"
     "zoxide"
     "go"
     "go-tools"
@@ -204,7 +205,6 @@ export PACMAN_PACKAGES=(
     "xbindkeys"
     "imwheel"
     "gnome-system-monitor"
-    "picom"
     "transmission-gtk"
 )
 
