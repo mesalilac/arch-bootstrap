@@ -58,10 +58,10 @@ mkdir -pv ~/.local/bin/app-images
 
 # -----------------------------------------------------------
 log_info "Enabling multilib"
-sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 log_info "Enabling parallel downloads"
-sed -i "/^#ParallelDownloads/"'s/^#//' /etc/pacman.conf
+sudo sed -i "/^#ParallelDownloads/"'s/^#//' /etc/pacman.conf
 
 sudo pacman -Syyu --noconfirm
 
