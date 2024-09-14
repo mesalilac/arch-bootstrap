@@ -1,6 +1,7 @@
 # TODO: add all packages from debian-packages.sh
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
+    "awesome"
     "clang"
     "obsidian"
     "uthash"
@@ -225,7 +226,6 @@ export AUR_PACKAGES=(
     "code-marketplace"
     "spaceship-prompt-git"
     "spotify"
-    "awesome-git"
     "gromit-mpx"
     "vtop"
     "discover-overlay"
