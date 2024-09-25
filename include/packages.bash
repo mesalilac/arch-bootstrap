@@ -2,6 +2,7 @@
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
     "awesome"
+    "acpid"
     "clang"
     "obsidian"
     "uthash"
