@@ -212,6 +212,7 @@ export PACMAN_PACKAGES=(
 )
 
 export AUR_PACKAGES=(
+    "xmousepasteblock-git"
     "opentabletdriver"
     "system-monitoring-center"
     "x11-emoji-picker"
