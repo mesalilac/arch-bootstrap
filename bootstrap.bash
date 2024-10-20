@@ -43,13 +43,7 @@ pause_execution
 
 # -----------------------------------------------------------
 log_info "Creating Directories"
-mkdir -pv ~/Documents
-mkdir -pv ~/Pictures
 mkdir -pv ~/Downloads
-mkdir -pv ~/Music
-mkdir -pv ~/Videos
-mkdir -pv ~/Screenshots
-mkdir -pv ~/mpv_screenshots
 mkdir -pv ~/sources
 mkdir -pv ~/.local/
 mkdir -pv ~/.local/bin/
