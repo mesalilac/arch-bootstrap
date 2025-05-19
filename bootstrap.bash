@@ -161,14 +161,14 @@ fi
 # build from source
 cd ~/sources
 
-if [[ ! -d "colorpicker" ]] ; then
-    git clone https://github.com/Jack12816/colorpicker.git
-fi
-cd colorpicker
-make clean colorpicker
-cp colorpicker ~/.local/bin/
+# if [[ ! -d "colorpicker" ]] ; then
+#     git clone https://github.com/Jack12816/colorpicker.git
+# fi
+# cd colorpicker
+# make clean colorpicker
+# cp colorpicker ~/.local/bin/
 
-cd ..
+# cd ..
 
 # add ~/sources/lua-language-server/bin to PATH
 if [[ ! -d "lua-language-server" ]] ; then
@@ -179,16 +179,16 @@ cd lua-language-server
 
 cd ..
 
-if [[ ! -d "picom" ]] ; then
-    git clone https://github.com/jonaburg/picom
-fi
-cd picom
-meson --buildtype=release . build
-ninja -C build
-# To install the binaries in /usr/local/bin (optional)
-sudo ninja -C build install
+# if [[ ! -d "picom" ]] ; then
+#     git clone https://github.com/jonaburg/picom
+# fi
+# cd picom
+# meson --buildtype=release . build
+# ninja -C build
+# # To install the binaries in /usr/local/bin (optional)
+# sudo ninja -C build install
 
-cd ..
+# cd ..
 # -----------------------------------------------------------
 
 # ____________________________________________________________
