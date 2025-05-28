@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# rewrite this script
+
 set -euo pipefail
 
 USER_ID="$(id -u)"
@@ -80,6 +82,7 @@ makepkg -si
 
 # -----------------------------------------------------------
 log_info "Downloading aur packages"
+# THIS FAILED! ssmtp, smenu
 yay -S --noconfirm --sudoloop --needed "${AUR_PACKAGES[@]}"
 # -----------------------------------------------------------
 
@@ -98,16 +101,6 @@ sudo systemctl enable --now acpid
 # -----------------------------------------------------------
 log_info "Starting the smartd daemon"
 sudo systemctl enable smartd.service --now
-# -----------------------------------------------------------
-
-# -----------------------------------------------------------
-log_info "Enabling libvirtd"
-sudo systemctl enable libvirtd --now
-# -----------------------------------------------------------
-
-# -----------------------------------------------------------
-log_info "Adding ${USER} to libvirt group"
-sudo usermod -a -G libvirt "${USER}"
 # -----------------------------------------------------------
 
 # -----------------------------------------------------------
@@ -171,13 +164,13 @@ cd ~/sources
 # cd ..
 
 # add ~/sources/lua-language-server/bin to PATH
-if [[ ! -d "lua-language-server" ]] ; then
-    git clone https://github.com/LuaLS/lua-language-server
-fi
-cd lua-language-server
-./make.sh
+# if [[ ! -d "lua-language-server" ]] ; then
+#     git clone https://github.com/LuaLS/lua-language-server
+# fi
+# cd lua-language-server
+# ./make.sh # THIS COMMAND FILED (NINJA)
 
-cd ..
+# cd ..
 
 # if [[ ! -d "picom" ]] ; then
 #     git clone https://github.com/jonaburg/picom
