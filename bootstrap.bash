@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# rewrite this script
+# TODO: rewrite this script
 
 set -euo pipefail
 
@@ -150,38 +150,6 @@ if [[ ! -d "${HOME}/.tmux/plugins/tpm" ]] ; then
     git clone "https://github.com/tmux-plugins/tpm" "${HOME}/.tmux/plugins/tpm"
 fi
 
-# -----------------------------------------------------------
-# build from source
-cd ~/sources
-
-# if [[ ! -d "colorpicker" ]] ; then
-#     git clone https://github.com/Jack12816/colorpicker.git
-# fi
-# cd colorpicker
-# make clean colorpicker
-# cp colorpicker ~/.local/bin/
-
-# cd ..
-
-# add ~/sources/lua-language-server/bin to PATH
-# if [[ ! -d "lua-language-server" ]] ; then
-#     git clone https://github.com/LuaLS/lua-language-server
-# fi
-# cd lua-language-server
-# ./make.sh # THIS COMMAND FILED (NINJA)
-
-# cd ..
-
-# if [[ ! -d "picom" ]] ; then
-#     git clone https://github.com/jonaburg/picom
-# fi
-# cd picom
-# meson --buildtype=release . build
-# ninja -C build
-# # To install the binaries in /usr/local/bin (optional)
-# sudo ninja -C build install
-
-# cd ..
 # -----------------------------------------------------------
 
 # ____________________________________________________________
