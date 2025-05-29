@@ -3,6 +3,7 @@
 export PACMAN_PACKAGES=(
     "lua-language-server"
     "wl-clipboard"
+    "xdg-desktop-portal-gtk"
     "xdg-desktop-portal-hyprland"
     "hyprpolkitagent"
     "hyprland"
