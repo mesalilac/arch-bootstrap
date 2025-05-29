@@ -1,6 +1,7 @@
 # TODO: add all packages from debian-packages.sh
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
+    "lua-language-server"
     "wl-clipboard"
     "xdg-desktop-portal-hyprland"
     "hyprpolkitagent"
