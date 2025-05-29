@@ -9,6 +9,6 @@ echo "Checking pacman packages"
 for pkg in "${PACMAN_PACKAGES[@]}";
 do
     if ! pacman -Ss "^${pkg}$" > /dev/null ; then
-        echo "ERROR: package '${pkg}' not found!"
+        echo "ERROR: Pacman package '${pkg}' not found!"
     fi
 done
