@@ -139,6 +139,7 @@ yarn global add prettier
 yarn global add neovim
 yarn global add sass
 yarn global add bash-language-server
+yarn global add git-open
 
 pipx install discover-overlay
 pipx install identify
