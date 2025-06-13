@@ -1,6 +1,7 @@
 # TODO: add all packages from debian-packages.sh
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
+    "eslint_d"
     "typescript-language-server"
     "flatpak"
     "lua-language-server"
