@@ -140,6 +140,11 @@ cargo install fd-find
 cargo install --features lsp --locked taplo-cli
 # -----------------------------------------------------------
 
+log_info "Installing hyprls"
+go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
+
+# -----------------------------------------------------------
+
 yarn global add prettier
 yarn global add neovim
 yarn global add sass
