@@ -1,6 +1,7 @@
 # TODO: add all packages from debian-packages.sh
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
+    "spotify-launcher"
     "power-profiles-daemon"
     "eslint_d"
     "typescript-language-server"
@@ -201,7 +202,6 @@ export AUR_PACKAGES=(
     "pfetch"
     "code-marketplace"
     "spaceship-prompt-git"
-    "spotify"
     "gromit-mpx"
     "vtop"
     "selectdefaultapplication-git"
