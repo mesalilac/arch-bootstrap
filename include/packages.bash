@@ -143,7 +143,7 @@ export PACMAN_PACKAGES=(
     #
     "kdenlive"
     "wget"
-    "discord"
+    # "discord" # use vesktop-bin
     "steam"
     "tree"
     "dust"
@@ -192,6 +192,7 @@ export PACMAN_PACKAGES=(
 )
 
 export AUR_PACKAGES=(
+    "vesktop-bin"
     "opentabletdriver"
     "system-monitoring-center"
     "adw-gtk3-git"
