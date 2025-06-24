@@ -132,6 +132,7 @@ cargo install tree-sitter-cli
 cargo install --git https://github.com/mesalilac/cmus-rpc.git
 cargo install du-dust
 cargo install diesel_cli
+cargo install diesel_cli_ext
 cargo install bat
 cargo install scout
 cargo install bacon
