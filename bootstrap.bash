@@ -147,7 +147,8 @@ go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
 
 # -----------------------------------------------------------
 
-yarn global add prettier
+# yarn global add prettier
+yarn global add @fsouza/prettierd
 yarn global add neovim
 yarn global add sass
 yarn global add bash-language-server
