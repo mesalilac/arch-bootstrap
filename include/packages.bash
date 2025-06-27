@@ -144,8 +144,9 @@ export PACMAN_PACKAGES=(
     # themes
     #
     "qt5ct"
-    "lxappearance"
-    "lxappearance-obconf"
+    "nwg-look" # lx lxappearance but for wayland
+    # "lxappearance"
+    # "lxappearance-obconf"
     "papirus-icon-theme"
     #
     "kdenlive"
