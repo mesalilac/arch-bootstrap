@@ -138,8 +138,8 @@ cargo install bacon
 cargo install ripgrep
 cargo install fd-find
 cargo install --features lsp --locked taplo-cli
+cargo install create-tauri-app --locked
 cargo install tauri-cli --version "^2.0.0" --locked
-
 # -----------------------------------------------------------
 
 log_info "Installing hyprls"
