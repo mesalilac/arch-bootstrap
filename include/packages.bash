@@ -202,7 +202,6 @@ export PACMAN_PACKAGES=(
 export AUR_PACKAGES=(
     "vesktop-bin"
     "opentabletdriver"
-    "system-monitoring-center"
     "adw-gtk3-git"
     "tmuxinator"
     "exa"
