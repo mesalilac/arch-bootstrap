@@ -1,7 +1,6 @@
 # TODO: add all packages from debian-packages.sh
 # TODO: write a python script to format this file and add package info
 export PACMAN_PACKAGES=(
-    "perf" # required by flamegraph
     "stylelint"
     "luacheck"
     "ghostty"

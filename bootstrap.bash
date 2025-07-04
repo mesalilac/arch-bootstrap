@@ -140,7 +140,6 @@ cargo install fd-find
 cargo install --features lsp --locked taplo-cli
 cargo install create-tauri-app --locked
 cargo install tauri-cli --version "^2.0.0" --locked
-cargo install flamegraph # Easy flamegraphs for Rust projects and everything else, without Perl or pipes <3
 # -----------------------------------------------------------
 
 log_info "Installing hyprls"
