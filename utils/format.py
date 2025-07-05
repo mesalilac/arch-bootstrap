@@ -181,7 +181,6 @@ def get_pacman_package_description(package: str) -> str | None:
     cmd = subprocess.run(
         args=["pacman", "-Qi", package],
         shell=False,
-        check=True,
         capture_output=True,
         text=True,
     )
