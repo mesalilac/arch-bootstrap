@@ -10,9 +10,9 @@ if [[ "${USER_ID}" -eq 0 ]]; then
     exit 1
 fi
 
-. "include/colors.bash"
-. "include/log.bash"
-. "include/packages.bash"
+. "include/colors.sh"
+. "include/log.sh"
+. "include/packages.sh"
 
 DOTFILES_REPO_URL="https://github.com/mesalilac/dotfiles"
 DOTFILES_DIR="${HOME}/.dotfiles"

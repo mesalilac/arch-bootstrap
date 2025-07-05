@@ -1,5 +1,5 @@
-# TODO: add all packages from debian-packages.sh
-# TODO: write a python script to format this file and add package info
+#!/usr/bin/env bash
+
 export PACMAN_PACKAGES=(
     "colordiff"                   # A Perl script wrapper for 'diff' that produces the same output but with pretty 'syntax' highlighting
     "stylelint"                   # Mighty, modern CSS linter
