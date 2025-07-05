@@ -47,7 +47,7 @@ class Token:
     def __repr__(self):
         return self.__str__()
 
-    def into_char(self) -> str:
+    def to_char(self) -> str:
         match self.name:
             case TokenName.EQUALS:
                 return LEXER_CHARS.EQUALS
@@ -63,8 +63,8 @@ class Token:
                 return LEXER_CHARS.QUOTATION_MARK
             case TokenName.NEW_LINE:
                 return LEXER_CHARS.NEW_LINE
-
-        return ""
+            case _:
+                return "Unreachable"
 
 
 class LexerState:
@@ -85,90 +85,81 @@ class LexerState:
         return self.cursor == len(self.text) - 1
 
 
-def collect_string_until(lexer_state: LexerState, end_char: str) -> str:
-    temp_string = ""
+class Lexer:
+    def __init__(self, text: str):
+        self.state = LexerState(text)
+        self.tokens: list[Token] = []
 
-    while not lexer_state.is_text_end():
-        char = lexer_state.char()
+    def __collect_string_until(self, end_char: str) -> str:
+        temp_string = ""
 
-        if lexer_state.peek() == end_char:
-            temp_string += char  # Breaks before collecting the last char in the string
-            break
+        while not self.state.is_text_end():
+            char = self.state.char()
 
-        temp_string += char
+            if self.state.peek() == end_char:
+                temp_string += (
+                    char  # Breaks before collecting the last char in the string
+                )
+                break
 
-        lexer_state.advance()
+            temp_string += char
 
-    return temp_string
+            self.state.advance()
 
+        return temp_string
 
-def is_last_token_name(tokens: list[Token], name: TokenName) -> bool:
-    return len(tokens) > 0 and tokens[-1].name == name
+    def __is_last_token_name(self, name: TokenName) -> bool:
+        return len(self.tokens) > 0 and self.tokens[-1].name == name
 
-
-def lexer(lexer_state: LexerState) -> list[Token]:
-    tokens: list[Token] = []
-
-    while not lexer_state.is_text_end():
-        match lexer_state.char():
-            case "\t":
-                pass
-            case LEXER_CHARS.NEW_LINE:
-                tokens.append(Token(TokenName.NEW_LINE, value=None))
-            case LEXER_CHARS.SPACE:
-                pass
-            case LEXER_CHARS.EQUALS:
-                tokens.append(Token(TokenName.EQUALS, value=None))
-            case LEXER_CHARS.LEFT_PARENTHESIS:
-                tokens.append(Token(TokenName.LEFT_PARENTHESIS, value=None))
-            case LEXER_CHARS.RIGHT_PARENTHESIS:
-                tokens.append(Token(TokenName.RIGHT_PARENTHESIS, value=None))
-            case LEXER_CHARS.QUOTATION_MARK:
-                tokens.append(Token(TokenName.QUOTATION_MARK, value=None))
-            case LEXER_CHARS.COMMENT:
-                if lexer_state.peek() == "\n":
-                    tokens.append(Token(TokenName.COMMENT, ""))
-                else:
-                    lexer_state.advance()  # skip #
-                    if lexer_state.char() == " ":
-                        lexer_state.advance()
-
-                    if is_last_token_name(tokens, TokenName.QUOTATION_MARK):
-                        # inline-comment
-                        comment_string = collect_string_until(lexer_state, "\n")
-                        tokens.append(Token(TokenName.INLINE_COMMENT, comment_string))
+    def lex(self):
+        while not self.state.is_text_end():
+            match self.state.char():
+                case "\t":
+                    pass
+                case LEXER_CHARS.NEW_LINE:
+                    self.tokens.append(Token(TokenName.NEW_LINE, value=None))
+                case LEXER_CHARS.SPACE:
+                    pass
+                case LEXER_CHARS.EQUALS:
+                    self.tokens.append(Token(TokenName.EQUALS, value=None))
+                case LEXER_CHARS.LEFT_PARENTHESIS:
+                    self.tokens.append(Token(TokenName.LEFT_PARENTHESIS, value=None))
+                case LEXER_CHARS.RIGHT_PARENTHESIS:
+                    self.tokens.append(Token(TokenName.RIGHT_PARENTHESIS, value=None))
+                case LEXER_CHARS.QUOTATION_MARK:
+                    self.tokens.append(Token(TokenName.QUOTATION_MARK, value=None))
+                case LEXER_CHARS.COMMENT:
+                    if self.state.peek() == "\n":
+                        self.tokens.append(Token(TokenName.COMMENT, ""))
                     else:
-                        # normal comment
-                        comment_string = collect_string_until(lexer_state, "\n")
-                        tokens.append(Token(TokenName.COMMENT, comment_string))
-            case _:
-                if is_last_token_name(tokens, TokenName.KEYWORD):
-                    package_list_name = collect_string_until(lexer_state, "=")
-                    tokens.append(Token(TokenName.PACKAGE_LIST_NAME, package_list_name))
-                elif is_last_token_name(tokens, TokenName.QUOTATION_MARK):
-                    package_name = collect_string_until(lexer_state, '"')
-                    tokens.append(Token(TokenName.PACKAGE, package_name))
-                else:
-                    keyword_string = collect_string_until(lexer_state, " ")
-                    tokens.append(Token(TokenName.KEYWORD, keyword_string))
+                        self.state.advance()  # skip #
+                        if self.state.char() == " ":
+                            self.state.advance()
 
-        lexer_state.advance()
+                        if self.__is_last_token_name(TokenName.QUOTATION_MARK):
+                            # inline-comment
+                            comment_string = self.__collect_string_until("\n")
+                            self.tokens.append(
+                                Token(TokenName.INLINE_COMMENT, comment_string)
+                            )
+                        else:
+                            # normal comment
+                            comment_string = self.__collect_string_until("\n")
+                            self.tokens.append(Token(TokenName.COMMENT, comment_string))
+                case _:
+                    if self.__is_last_token_name(TokenName.KEYWORD):
+                        package_list_name = self.__collect_string_until("=")
+                        self.tokens.append(
+                            Token(TokenName.PACKAGE_LIST_NAME, package_list_name)
+                        )
+                    elif self.__is_last_token_name(TokenName.QUOTATION_MARK):
+                        package_name = self.__collect_string_until('"')
+                        self.tokens.append(Token(TokenName.PACKAGE, package_name))
+                    else:
+                        keyword_string = self.__collect_string_until(" ")
+                        self.tokens.append(Token(TokenName.KEYWORD, keyword_string))
 
-    return tokens
-
-
-def collect_pacman_packages(tokens: list[Token]) -> list[str]:
-    l = []
-
-    for token in tokens:
-        if token.name == TokenName.RIGHT_PARENTHESIS:
-            break
-
-        if token.name == TokenName.PACKAGE:
-            if token.value != None:
-                l.append(token.value)
-
-    return l
+            self.state.advance()
 
 
 def max_pacman_package_length(tokens: list[Token]) -> int:
@@ -230,15 +221,15 @@ def tokens_to_text(tokens: list[Token]) -> str:
                     text += token.value
 
             case TokenName.EQUALS:
-                text += token.into_char()
+                text += token.to_char()
 
             case TokenName.LEFT_PARENTHESIS:
                 is_inside_list = True
-                text += token.into_char()
+                text += token.to_char()
 
             case TokenName.RIGHT_PARENTHESIS:
                 is_inside_list = False
-                text += token.into_char()
+                text += token.to_char()
 
             case TokenName.PACKAGE:
                 if token.value:
@@ -247,7 +238,7 @@ def tokens_to_text(tokens: list[Token]) -> str:
             case TokenName.COMMENT:
                 if is_inside_list:
                     text += indent
-                text += token.into_char()
+                text += token.to_char()
                 text += " "
                 if token.value:
                     text += token.value
@@ -258,7 +249,7 @@ def tokens_to_text(tokens: list[Token]) -> str:
                 if package_name != None:
                     for _ in range(0, max_package_length - len(package_name)):
                         text += " "
-                text += token.into_char()
+                text += token.to_char()
                 text += " "
                 if token.value:
                     text += token.value
@@ -268,7 +259,7 @@ def tokens_to_text(tokens: list[Token]) -> str:
                     if is_inside_list:
                         text += indent
 
-                text += token.into_char()
+                text += token.to_char()
 
                 if (
                     is_inside_pacman_list
@@ -288,7 +279,7 @@ def tokens_to_text(tokens: list[Token]) -> str:
                         text += description
 
             case TokenName.NEW_LINE:
-                text += token.into_char()
+                text += token.to_char()
 
     return text
 
@@ -306,10 +297,10 @@ def main():
     if len(text) == 0:
         return
 
-    lexer_state = LexerState(text)
-    tokens = lexer(lexer_state)
+    lexer = Lexer(text)
+    lexer.lex()
 
-    new_text = tokens_to_text(tokens)
+    new_text = tokens_to_text(lexer.tokens)
     print(new_text)
 
 
