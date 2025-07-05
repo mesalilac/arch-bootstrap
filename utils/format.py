@@ -3,16 +3,19 @@
 from enum import Enum
 import os
 import subprocess
+import types
 
 PACKAGES_FILE_PATH = "./include/packages.bash"
 
-CHAR_EQUALS = "="
-CHAR_LEFT_PARENTHESIS = "("
-CHAR_RIGHT_PARENTHESIS = ")"
-CHAR_COMMENT = "#"
-CHAR_QUOTATION_MARK = '"'
-CHAR_NEW_LINE = "\n"
-CHAR_SPACE = " "
+LEXER_CHARS = types.SimpleNamespace()
+
+LEXER_CHARS.EQUALS = "="
+LEXER_CHARS.LEFT_PARENTHESIS = "("
+LEXER_CHARS.RIGHT_PARENTHESIS = ")"
+LEXER_CHARS.COMMENT = "#"
+LEXER_CHARS.QUOTATION_MARK = '"'
+LEXER_CHARS.NEW_LINE = "\n"
+LEXER_CHARS.SPACE = " "
 
 
 class TokenName(Enum):
@@ -44,22 +47,24 @@ class Token:
     def __repr__(self):
         return self.__str__()
 
-    def token_name_into_char(self) -> str | None:
+    def into_char(self) -> str:
         match self.name:
             case TokenName.EQUALS:
-                return CHAR_EQUALS
+                return LEXER_CHARS.EQUALS
             case TokenName.LEFT_PARENTHESIS:
-                return CHAR_LEFT_PARENTHESIS
+                return LEXER_CHARS.LEFT_PARENTHESIS
             case TokenName.RIGHT_PARENTHESIS:
-                return CHAR_RIGHT_PARENTHESIS
+                return LEXER_CHARS.RIGHT_PARENTHESIS
             case TokenName.COMMENT:
-                return CHAR_COMMENT
+                return LEXER_CHARS.COMMENT
             case TokenName.INLINE_COMMENT:
-                return CHAR_COMMENT
+                return LEXER_CHARS.COMMENT
             case TokenName.QUOTATION_MARK:
-                return CHAR_QUOTATION_MARK
+                return LEXER_CHARS.QUOTATION_MARK
             case TokenName.NEW_LINE:
-                return CHAR_NEW_LINE
+                return LEXER_CHARS.NEW_LINE
+
+        return ""
 
 
 class LexerState:
@@ -108,19 +113,19 @@ def lexer(lexer_state: LexerState) -> list[Token]:
         match lexer_state.char():
             case "\t":
                 pass
-            case "\n":
+            case LEXER_CHARS.NEW_LINE:
                 tokens.append(Token(TokenName.NEW_LINE, value=None))
-            case " ":
+            case LEXER_CHARS.SPACE:
                 pass
-            case "=":
+            case LEXER_CHARS.EQUALS:
                 tokens.append(Token(TokenName.EQUALS, value=None))
-            case "(":
+            case LEXER_CHARS.LEFT_PARENTHESIS:
                 tokens.append(Token(TokenName.LEFT_PARENTHESIS, value=None))
-            case ")":
+            case LEXER_CHARS.RIGHT_PARENTHESIS:
                 tokens.append(Token(TokenName.RIGHT_PARENTHESIS, value=None))
-            case '"':
+            case LEXER_CHARS.QUOTATION_MARK:
                 tokens.append(Token(TokenName.QUOTATION_MARK, value=None))
-            case "#":
+            case LEXER_CHARS.COMMENT:
                 if lexer_state.peek() == "\n":
                     tokens.append(Token(TokenName.COMMENT, ""))
                 else:
@@ -209,8 +214,6 @@ def tokens_to_text(tokens: list[Token]) -> str:
     is_inside_list = False
     max_package_length = max_pacman_package_length(tokens)
 
-    # TODO: get the longest package name and + empty space for balanced inline-comments
-    # TODO: in Package check if there is a inline-comment, if not insert package description
     for index, token in enumerate(tokens):
         match token.name:
             case TokenName.KEYWORD:
@@ -227,15 +230,15 @@ def tokens_to_text(tokens: list[Token]) -> str:
                     text += token.value
 
             case TokenName.EQUALS:
-                text += CHAR_EQUALS
+                text += token.into_char()
 
             case TokenName.LEFT_PARENTHESIS:
                 is_inside_list = True
-                text += CHAR_LEFT_PARENTHESIS
+                text += token.into_char()
 
             case TokenName.RIGHT_PARENTHESIS:
                 is_inside_list = False
-                text += CHAR_RIGHT_PARENTHESIS
+                text += token.into_char()
 
             case TokenName.PACKAGE:
                 if token.value:
@@ -244,7 +247,7 @@ def tokens_to_text(tokens: list[Token]) -> str:
             case TokenName.COMMENT:
                 if is_inside_list:
                     text += indent
-                text += CHAR_COMMENT
+                text += token.into_char()
                 text += " "
                 if token.value:
                     text += token.value
@@ -255,7 +258,7 @@ def tokens_to_text(tokens: list[Token]) -> str:
                 if package_name != None:
                     for _ in range(0, max_package_length - len(package_name)):
                         text += " "
-                text += CHAR_COMMENT
+                text += token.into_char()
                 text += " "
                 if token.value:
                     text += token.value
@@ -265,7 +268,7 @@ def tokens_to_text(tokens: list[Token]) -> str:
                     if is_inside_list:
                         text += indent
 
-                text += CHAR_QUOTATION_MARK
+                text += token.into_char()
 
                 if (
                     is_inside_pacman_list
@@ -280,12 +283,12 @@ def tokens_to_text(tokens: list[Token]) -> str:
                         text += " "
                         for _ in range(0, max_package_length - len(package_name)):
                             text += " "
-                        text += CHAR_COMMENT
+                        text += "#"
                         text += " "
                         text += description
 
             case TokenName.NEW_LINE:
-                text += CHAR_NEW_LINE
+                text += token.into_char()
 
     return text
 
