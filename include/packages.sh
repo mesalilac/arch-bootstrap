@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export PACMAN_PACKAGES=(
+    "resources"                   # Monitor for system resources and processes
     "colordiff"                   # A Perl script wrapper for 'diff' that produces the same output but with pretty 'syntax' highlighting
     "stylelint"                   # Mighty, modern CSS linter
     "luacheck"                    # A tool for linting and static analysis of Lua code
@@ -219,4 +220,3 @@ export AUR_PACKAGES=(
     "pnpm-bin"
     "icons-in-terminal"
     "inxi"
-)
