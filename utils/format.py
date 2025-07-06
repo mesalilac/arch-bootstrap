@@ -300,7 +300,11 @@ def main():
     lexer.lex()
 
     new_text = tokens_to_text(lexer.tokens)
+
     print(new_text)
+
+    with open(PACKAGES_FILE_PATH, "w") as f:
+        f.write(new_text)
 
 
 if __name__ == "__main__":
