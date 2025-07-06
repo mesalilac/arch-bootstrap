@@ -5,7 +5,7 @@ import os
 import subprocess
 import types
 
-PACKAGES_FILE_PATH = "./include/packages.bash"
+PACKAGES_FILE_PATH = "./include/packages.sh"
 
 LEXER_CHARS = types.SimpleNamespace()
 
