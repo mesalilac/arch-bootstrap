@@ -239,7 +239,8 @@ def tokens_to_text(tokens: list[Token]) -> str:
                     text += indent
                 text += token.to_char()
                 if token.value:
-                    text += " "
+                    if token.value[0] != "!":  # Don't add a space before the shebang
+                        text += " "
                     text += token.value
 
             case TokenName.INLINE_COMMENT:
