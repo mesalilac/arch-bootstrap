@@ -238,8 +238,8 @@ def tokens_to_text(tokens: list[Token]) -> str:
                 if is_inside_list:
                     text += indent
                 text += token.to_char()
-                text += " "
                 if token.value:
+                    text += " "
                     text += token.value
 
             case TokenName.INLINE_COMMENT:
