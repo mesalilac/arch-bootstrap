@@ -19,7 +19,7 @@ fi
 DOTFILES_REPO_URL="https://github.com/mesalilac/dotfiles"
 DOTFILES_DIR="${HOME}/.dotfiles"
 
-export PATH="${HOME}/.cargo/bin:${PATH}"
+PATH="${HOME}/.cargo/bin:${PATH}"
 
 function log_info() {
     echo -e "${On_Green}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') INFO ]${NO_COLOR} $1"
