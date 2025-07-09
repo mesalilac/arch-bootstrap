@@ -197,91 +197,94 @@ def get_pacman_package_description(package: str) -> str | None:
     return None
 
 
-def tokens_to_text(tokens: list[Token]) -> str:
-    text = ""
+def write_tokens_to_file(tokens: list[Token]):
     indent = "    "
     is_inside_pacman_list = False
     is_inside_list = False
     max_package_length = max_pacman_package_length(tokens)
 
-    for index, token in enumerate(tokens):
-        match token.name:
-            case TokenName.KEYWORD:
-                if token.value:
-                    text += token.value
-                    text += " "
+    with open(PACKAGES_FILE_PATH, "w") as f:
+        for index, token in enumerate(tokens):
+            match token.name:
+                case TokenName.KEYWORD:
+                    if token.value:
+                        f.write(token.value)
+                        f.write(" ")
 
-            case TokenName.PACKAGE_LIST_NAME:
-                if token.value:
-                    if token.value == "PACMAN_PACKAGES":
-                        is_inside_pacman_list = True
-                    else:
-                        is_inside_pacman_list = False
-                    text += token.value
+                case TokenName.PACKAGE_LIST_NAME:
+                    if token.value:
+                        if token.value == "PACMAN_PACKAGES":
+                            is_inside_pacman_list = True
+                        else:
+                            is_inside_pacman_list = False
+                        f.write(token.value)
 
-            case TokenName.EQUALS:
-                text += token.to_char()
+                case TokenName.EQUALS:
+                    f.write(token.to_char())
 
-            case TokenName.LEFT_PARENTHESIS:
-                is_inside_list = True
-                text += token.to_char()
+                case TokenName.LEFT_PARENTHESIS:
+                    is_inside_list = True
+                    f.write(token.to_char())
 
-            case TokenName.RIGHT_PARENTHESIS:
-                is_inside_list = False
-                text += token.to_char()
+                case TokenName.RIGHT_PARENTHESIS:
+                    is_inside_list = False
+                    f.write(token.to_char())
 
-            case TokenName.PACKAGE:
-                if token.value:
-                    text += token.value
+                case TokenName.PACKAGE:
+                    if token.value:
+                        f.write(token.value)
 
-            case TokenName.COMMENT:
-                if is_inside_list:
-                    text += indent
-                text += token.to_char()
-                if token.value:
-                    if token.value[0] != "!":  # Don't add a space before the shebang
-                        text += " "
-                    text += token.value
-
-            case TokenName.INLINE_COMMENT:
-                text += " "
-                package_name = tokens[index - 2].value
-                if package_name != None:
-                    for _ in range(0, max_package_length - len(package_name)):
-                        text += " "
-                text += token.to_char()
-                text += " "
-                if token.value:
-                    text += token.value
-
-            case TokenName.QUOTATION_MARK:
-                if tokens[index - 1].name == TokenName.NEW_LINE:
+                case TokenName.COMMENT:
                     if is_inside_list:
-                        text += indent
+                        f.write(indent)
+                    f.write(token.to_char())
+                    if token.value:
+                        if (
+                            token.value[0] != "!"
+                        ):  # Don't add a space before the shebang
+                            f.write(" ")
+                        f.write(token.value)
 
-                text += token.to_char()
-
-                if (
-                    is_inside_pacman_list
-                    and tokens[index - 1].name == TokenName.PACKAGE
-                    and tokens[index + 1].name != TokenName.INLINE_COMMENT
-                ):
-                    package_name = tokens[index - 1].value
-                    assert package_name != None
-
-                    description = get_pacman_package_description(package_name)
-                    if description != None:
-                        text += " "
+                case TokenName.INLINE_COMMENT:
+                    f.write(" ")
+                    package_name = tokens[index - 2].value
+                    if package_name != None:
                         for _ in range(0, max_package_length - len(package_name)):
-                            text += " "
-                        text += "#"
-                        text += " "
-                        text += description
+                            f.write(" ")
+                    f.write(token.to_char())
+                    f.write(" ")
+                    if token.value:
+                        f.write(token.value)
 
-            case TokenName.NEW_LINE:
-                text += token.to_char()
+                case TokenName.QUOTATION_MARK:
+                    if tokens[index - 1].name == TokenName.NEW_LINE:
+                        if is_inside_list:
+                            f.write(indent)
 
-    return text
+                    f.write(token.to_char())
+
+                    if (
+                        is_inside_pacman_list
+                        and tokens[index - 1].name == TokenName.PACKAGE
+                        and tokens[index + 1].name != TokenName.INLINE_COMMENT
+                    ):
+                        package_name = tokens[index - 1].value
+                        assert package_name != None
+
+                        description = get_pacman_package_description(package_name)
+                        if description != None:
+                            f.write(" ")
+                            for _ in range(0, max_package_length - len(package_name)):
+                                f.write(" ")
+                            f.write("#")
+                            f.write(" ")
+                            f.write(description)
+
+                case TokenName.NEW_LINE:
+                    f.write(token.to_char())
+
+            if index == len(tokens) - 1:
+                f.write("\n")
 
 
 def main():
@@ -300,12 +303,7 @@ def main():
     lexer = Lexer(text)
     lexer.lex()
 
-    new_text = tokens_to_text(lexer.tokens)
-
-    print(new_text)
-
-    with open(PACKAGES_FILE_PATH, "w") as f:
-        f.write(new_text)
+    write_tokens_to_file(lexer.tokens)
 
 
 if __name__ == "__main__":
