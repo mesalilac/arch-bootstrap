@@ -203,6 +203,7 @@ export PACMAN_PACKAGES=(
 )
 
 export AUR_PACKAGES=(
+    "sqlitestudio-bin"
     "vesktop-bin"
     "opentabletdriver"
     "adw-gtk3-git"
