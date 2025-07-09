@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
+LOG_FILE="${HOME}/arch-bootstrap.log"
+
+exec > >(tee -a "${LOG_FILE}") 2>&1
+
 set -euo pipefail
+set -x
 
 USER_ID="$(id -u)"
 if [[ "${USER_ID}" -eq 0 ]]; then
@@ -9,13 +14,16 @@ if [[ "${USER_ID}" -eq 0 ]]; then
 fi
 
 . "include/colors.sh"
-. "include/log.sh"
 . "include/packages.sh"
 
 DOTFILES_REPO_URL="https://github.com/mesalilac/dotfiles"
 DOTFILES_DIR="${HOME}/.dotfiles"
 
 export PATH="${HOME}/.cargo/bin:${PATH}"
+
+function log_info() {
+    echo -e "${On_Green}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') INFO ]${NO_COLOR} $1"
+}
 
 function fn_print_banner {
     echo -e "${IGreen}"
