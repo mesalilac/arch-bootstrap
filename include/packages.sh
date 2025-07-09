@@ -204,6 +204,7 @@ export PACMAN_PACKAGES=(
 )
 
 export AUR_PACKAGES=(
+    "czkawka-gui-bin"
     "sqlitestudio-bin"
     "vesktop-bin"
     "opentabletdriver"
