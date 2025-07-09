@@ -74,7 +74,7 @@ function fn_setup {
     sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
     fn_log_info "Enabling parallel downloads"
-    sudo sed -i "/^#ParallelDownloads/"'s/^#//' /etc/pacman.conf
+    sudo sed -i "s/^#ParallelDownloads = 5/ParallelDownloads = 15/" /etc/pacman.conf
 }
 
 function fn_install_pacman_packages {
