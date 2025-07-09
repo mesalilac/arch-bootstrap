@@ -54,6 +54,11 @@ function fn_setup {
     mkdir -pv ~/.local/bin/
     mkdir -pv ~/.local/bin/app-images
 
+    if [[ ! -f "/etc/pacman.conf.bak" ]]; then
+        log_info "Backing up /etc/pacman.conf"
+        sudo cp /etc/pacman.conf /etc/pacman.conf.bak
+    fi
+
     log_info "Enabling multilib"
     sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
