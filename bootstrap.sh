@@ -25,6 +25,13 @@ function log_info() {
     echo -e "${On_Green}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') INFO ]${NO_COLOR} $1"
 }
 
+function fn_check_cmd {
+    if ! command -v "$1" > /dev/null 2>&1; then
+        log_info "Dependency not found: $1"
+        exit 1
+    fi
+}
+
 function fn_print_banner {
     echo -e "${IGreen}"
     cat << "EOF"
@@ -99,6 +106,17 @@ function fn_install_aur_packages {
     yay -S --noconfirm --sudoloop --needed "${AUR_PACKAGES[@]}"
 }
 
+function fn_dependency_check {
+    log_info "Checking dependencies..."
+    fn_check_cmd "pipx"
+    fn_check_cmd "cargo"
+    fn_check_cmd "curl"
+    fn_check_cmd "go"
+    fn_check_cmd "yarn"
+    fn_check_cmd "flatpak"
+    fn_check_cmd "git"
+}
+
 function fn_restore_dotfiles {
     if [[ ! -d "${DOTFILES_DIR}" ]]; then
         git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}"
@@ -170,6 +188,7 @@ function fn_main {
     fn_setup
     fn_install_pacman_packages
     fn_install_aur_packages
+    fn_dependency_check
     fn_restore_dotfiles
     fn_systemctl
     fn_install_cargo_packages
