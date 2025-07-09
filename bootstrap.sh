@@ -100,7 +100,9 @@ function fn_install_aur_packages {
 }
 
 function fn_restore_dotfiles {
-    git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}"
+    if [[ ! -d "${DOTFILES_DIR}" ]]; then
+        git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}"
+    fi
     cd "${DOTFILES_DIR}"
     ./restore
     cd "${HOME}"
