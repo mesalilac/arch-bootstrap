@@ -100,8 +100,6 @@ function fn_install_cargo_packages {
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
     log_info "Installing cargo packages"
-    # https://github.com/mozilla/sccache
-    cargo install sccache
     cargo install stylua
     cargo install tree-sitter-cli
     cargo install --git https://github.com/mesalilac/cmus-rpc.git
