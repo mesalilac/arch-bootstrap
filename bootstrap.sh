@@ -69,7 +69,11 @@ function fn_setup {
 function fn_install_pacman_packages {
     sudo pacman -Syyu --noconfirm
 
-    # TODO: Check if PACMAN_PACKAGES array is empty or not set
+    if [[ -z "${PACMAN_PACKAGES[*]}" ]]; then
+        log_info "Pacman packages list is empty"
+        exit 1
+    fi
+
     log_info "Downloading pacman packages"
     sudo pacman -Syu --noconfirm --needed "${PACMAN_PACKAGES[@]}"
 
@@ -84,6 +88,11 @@ function fn_install_aur_packages {
     git clone https://aur.archlinux.org/yay.git /tmp/yay
     cd /tmp/yay
     makepkg -si
+
+    if [[ -z "${AUR_PACKAGES[*]}" ]]; then
+        log_info "Aur packages list is empty"
+        exit 1
+    fi
 
     log_info "Downloading aur packages"
     # THIS FAILED! ssmtp, smenu
