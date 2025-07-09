@@ -21,13 +21,13 @@ DOTFILES_DIR="${HOME}/.dotfiles"
 
 PATH="${HOME}/.cargo/bin:${PATH}"
 
-function log_info() {
+function fn_log_info() {
     echo -e "${On_Green}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') INFO ]${NO_COLOR} $1"
 }
 
 function fn_check_cmd {
     if ! command -v "$1" > /dev/null 2>&1; then
-        log_info "Dependency not found: $1"
+        fn_log_info "Dependency not found: $1"
         exit 1
     fi
 }
@@ -54,7 +54,7 @@ EOF
 }
 
 function fn_setup {
-    log_info "Creating Directories"
+    fn_log_info "Creating Directories"
     mkdir -pv ~/Downloads
     mkdir -pv ~/sources
     mkdir -pv ~/.local/
@@ -62,14 +62,14 @@ function fn_setup {
     mkdir -pv ~/.local/bin/app-images
 
     if [[ ! -f "/etc/pacman.conf.bak" ]]; then
-        log_info "Backing up /etc/pacman.conf"
+        fn_log_info "Backing up /etc/pacman.conf"
         sudo cp /etc/pacman.conf /etc/pacman.conf.bak
     fi
 
-    log_info "Enabling multilib"
+    fn_log_info "Enabling multilib"
     sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
-    log_info "Enabling parallel downloads"
+    fn_log_info "Enabling parallel downloads"
     sudo sed -i "/^#ParallelDownloads/"'s/^#//' /etc/pacman.conf
 }
 
@@ -77,37 +77,37 @@ function fn_install_pacman_packages {
     sudo pacman -Syyu --noconfirm
 
     if [[ -z "${PACMAN_PACKAGES[*]}" ]]; then
-        log_info "Pacman packages list is empty"
+        fn_log_info "Pacman packages list is empty"
         exit 1
     fi
 
-    log_info "Downloading pacman packages"
+    fn_log_info "Downloading pacman packages"
     sudo pacman -Syu --noconfirm --needed "${PACMAN_PACKAGES[@]}"
 
-    log_info "Changing default shell to zsh!"
+    fn_log_info "Changing default shell to zsh!"
     ZSH_PATH="$(command -v zsh)"
     chsh -s "${ZSH_PATH}"
 }
 
 function fn_install_aur_packages {
     # TODO: use paru
-    log_info "Installing yay (aur helper)"
+    fn_log_info "Installing yay (aur helper)"
     git clone https://aur.archlinux.org/yay.git /tmp/yay
     cd /tmp/yay
     makepkg -si
 
     if [[ -z "${AUR_PACKAGES[*]}" ]]; then
-        log_info "Aur packages list is empty"
+        fn_log_info "Aur packages list is empty"
         exit 1
     fi
 
-    log_info "Downloading aur packages"
+    fn_log_info "Downloading aur packages"
     # THIS FAILED! ssmtp, smenu
     yay -S --noconfirm --sudoloop --needed "${AUR_PACKAGES[@]}"
 }
 
 function fn_dependency_check {
-    log_info "Checking dependencies..."
+    fn_log_info "Checking dependencies..."
     fn_check_cmd "pipx"
     fn_check_cmd "cargo"
     fn_check_cmd "curl"
@@ -127,21 +127,21 @@ function fn_restore_dotfiles {
 }
 
 function fn_systemctl {
-    log_info "Starting the power profiles daemon"
+    fn_log_info "Starting the power profiles daemon"
     sudo systemctl enable power-profiles-daemon.service
 
-    log_info "Starting the acpid daemon"
+    fn_log_info "Starting the acpid daemon"
     sudo systemctl enable --now acpid
 
-    log_info "Starting the smartd daemon"
+    fn_log_info "Starting the smartd daemon"
     sudo systemctl enable smartd.service --now
 }
 
 function fn_install_cargo_packages {
-    log_info "Installing rust"
+    fn_log_info "Installing rust"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-    log_info "Installing cargo packages"
+    fn_log_info "Installing cargo packages"
     cargo install stylua
     cargo install tree-sitter-cli
     cargo install --git https://github.com/mesalilac/cmus-rpc.git
@@ -158,7 +158,7 @@ function fn_install_cargo_packages {
 }
 
 function fn_install_go_packages {
-    log_info "Installing hyprls"
+    fn_log_info "Installing hyprls"
     go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
 }
 
