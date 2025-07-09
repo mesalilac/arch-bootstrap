@@ -31,7 +31,7 @@ function fn_log_error() {
 
 function fn_check_cmd {
     if ! command -v "$1" > /dev/null 2>&1; then
-        fn_log_info "Dependency not found: $1"
+        fn_log_error "Dependency not found: $1"
         exit 1
     fi
 }
@@ -81,7 +81,7 @@ function fn_install_pacman_packages {
     sudo pacman -Syyu --noconfirm
 
     if [[ -z "${PACMAN_PACKAGES[*]}" ]]; then
-        fn_log_info "Pacman packages list is empty"
+        fn_log_error "Pacman packages list is empty"
         exit 1
     fi
 
@@ -101,7 +101,7 @@ function fn_install_aur_packages {
     makepkg -si
 
     if [[ -z "${AUR_PACKAGES[*]}" ]]; then
-        fn_log_info "Aur packages list is empty"
+        fn_log_error "Aur packages list is empty"
         exit 1
     fi
 
