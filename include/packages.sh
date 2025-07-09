@@ -221,3 +221,4 @@ export AUR_PACKAGES=(
     "pnpm-bin"
     "icons-in-terminal"
     "inxi"
+)
