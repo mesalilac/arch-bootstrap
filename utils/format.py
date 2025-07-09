@@ -179,7 +179,7 @@ def max_pacman_package_length(tokens: list[Token]) -> int:
 
 def get_pacman_package_description(package: str) -> str | None:
     cmd = subprocess.run(
-        args=["pacman", "-Qi", package],
+        args=["pacman", "-Si", package],
         shell=False,
         capture_output=True,
         text=True,
