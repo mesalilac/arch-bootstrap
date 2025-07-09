@@ -25,6 +25,10 @@ function fn_log_info() {
     echo -e "${On_Green}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') INFO ]${NO_COLOR} $1"
 }
 
+function fn_log_error() {
+    echo -e "${On_Red}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') ERROR ]${NO_COLOR} $1"
+}
+
 function fn_check_cmd {
     if ! command -v "$1" > /dev/null 2>&1; then
         fn_log_info "Dependency not found: $1"
