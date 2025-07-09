@@ -22,11 +22,11 @@ DOTFILES_DIR="${HOME}/.dotfiles"
 PATH="${HOME}/.cargo/bin:${PATH}"
 
 function fn_log_info() {
-    echo -e "${On_Green}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') INFO ]${NO_COLOR} $1"
+    echo -e "[$(date +'%Y-%m-%d %H:%M:%S') ${On_Green}${BBlack} INFO ${NO_COLOR} ] $1"
 }
 
 function fn_log_error() {
-    echo -e "${On_Red}${BBlack}[$(date +'%Y-%m-%d %H:%M:%S') ERROR ]${NO_COLOR} $1"
+    echo -e "[$(date +'%Y-%m-%d %H:%M:%S') ${On_Red}${BBlack} ERROR ${NO_COLOR} ] $1"
 }
 
 function fn_check_cmd {
