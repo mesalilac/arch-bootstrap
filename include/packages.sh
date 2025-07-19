@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export PACMAN_PACKAGES=(
+    "biome"                       # Formatter, linter, and more for Javascript, Typescript, JSON, and CSS
     "sccache"                     # Shared compilation cache
     "chafa"                       # Image-to-text converter supporting a wide range of symbols and palettes, transparency, animations, etc.
     "resources"                   # Monitor for system resources and processes
