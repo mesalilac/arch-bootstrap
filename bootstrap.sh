@@ -51,10 +51,12 @@ EOF
     echo -e "arch bootstrap script"
     echo -e "repo: https://github.com/mesalilac/arch-bootstrap"
 
-    local PROMPT_MESSAGE="Press any key to continue... "
+    if [[ "${USER}" != "testuser" ]]; then
+        local PROMPT_MESSAGE="Press any key to continue... "
 
-    # stop executing the script and wait for any key press
-    read -rsn1 -p "${PROMPT_MESSAGE}" ; echo
+        # stop executing the script and wait for any key press
+        read -rsn1 -p "${PROMPT_MESSAGE}" ; echo
+    fi
 }
 
 function fn_setup {
