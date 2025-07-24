@@ -91,6 +91,7 @@ function fn_install_pacman_packages {
 
     fn_log_info "Changing default shell to zsh!"
     ZSH_PATH="$(command -v zsh)"
+    echo "${ZSH_PATH}" | sudo tee -a /etc/shells
     chsh -s "${ZSH_PATH}"
 }
 
