@@ -8,7 +8,7 @@ WORKDIR /home/testuser
 RUN pacman-key --init
 
 RUN pacman -Sy --noconfirm && \
-    pacman -S --noconfirm sudo && \
+    pacman -S --noconfirm sudo base-devel && \
     echo "testuser:test" | chpasswd
 
 RUN echo "testuser ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/testuser-nopasswd && \
