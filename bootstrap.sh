@@ -71,7 +71,8 @@ function fn_setup {
     fi
 
     fn_log_info "Enabling multilib"
-    sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+    # sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+    sudo echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" | sudo tee -a /etc/pacman.conf
 
     fn_log_info "Enabling parallel downloads"
     sudo sed -i "s/^#ParallelDownloads = 5/ParallelDownloads = 15/" /etc/pacman.conf
