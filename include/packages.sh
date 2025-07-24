@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export PACMAN_PACKAGES=(
+    "git"                         # the fast distributed version control system
     "grim"                        # Screenshot utility for Wayland
     "sccache"                     # Shared compilation cache
     "chafa"                       # Image-to-text converter supporting a wide range of symbols and palettes, transparency, animations, etc.
