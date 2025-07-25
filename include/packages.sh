@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export PACMAN_PACKAGES=(
+    "firefox-developer-edition"   # Fast, Private & Safe Web Browser (Developer Edition)
     "git"                         # the fast distributed version control system
     "grim"                        # Screenshot utility for Wayland
     "sccache"                     # Shared compilation cache
@@ -199,7 +200,6 @@ export PACMAN_PACKAGES=(
     "yad"                         # A fork of zenity - display graphical dialogs from shell scripts or command line
     "npm"                         # JavaScript package manager
     "yarn"                        # Fast, reliable, and secure dependency management
-    "firefox"                     # Fast, Private & Safe Web Browser
     "mpv"                         # a free, open source, and cross-platform media player
     "gnome-system-monitor"        # View current processes and monitor system state
     "transmission-gtk"            # Fast, easy, and free BitTorrent client (GTK+ GUI)
