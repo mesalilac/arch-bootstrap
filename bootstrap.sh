@@ -176,6 +176,7 @@ function fn_install_npm_packages {
     yarn global add sass
     yarn global add bash-language-server
     yarn global add git-open
+    yarn global add web-ext
 }
 
 function fn_install_pip_packages {
