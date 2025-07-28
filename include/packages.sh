@@ -206,6 +206,7 @@ export PACMAN_PACKAGES=(
 )
 
 export AUR_PACKAGES=(
+    "cartero-git"
     "cloudflare-warp-bin"
     "czkawka-gui-bin"
     "sqlitestudio-bin"
