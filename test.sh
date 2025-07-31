@@ -18,7 +18,7 @@ fi
 
 IMAGE_TAG="${PROJECT_NAME}"
 
-docker build --no-cache -t "${IMAGE_TAG}" .
+docker build --rm --no-cache -t "${IMAGE_TAG}" .
 
 
 docker run --rm -it "${IMAGE_TAG}" | tee test.log
