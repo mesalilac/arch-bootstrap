@@ -22,3 +22,5 @@ docker build --no-cache -t "${IMAGE_TAG}" .
 
 
 docker run --rm -it "${IMAGE_TAG}" | tee test.log
+
+docker rmi "${IMAGE_TAG}"
