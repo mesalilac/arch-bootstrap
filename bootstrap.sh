@@ -179,8 +179,8 @@ function fn_install_npm_packages {
 }
 
 function fn_install_pip_packages {
-    pipx install discover-overlay
-    pipx install identify
+    uv tool install discover-overlay
+    uv tool install identify
 }
 
 function fn_install_zsh_prompt {

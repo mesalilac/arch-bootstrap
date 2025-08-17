@@ -44,7 +44,7 @@ export PACMAN_PACKAGES=(
     "zoxide"                      # A smarter cd command for your terminal
     "go"                          # Core compiler tools for the Go programming language
     "go-tools"                    # Developer tools for the Go programming language
-    "python-pipx"                 # Install and Run Python Applications in Isolated Environments
+    "uv"                          # An extremely fast Python package installer and resolver written in Rust
     "python-black"                # Uncompromising Python code formatter
     "smartmontools"               # Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives
     "shellcheck"                  # Shell script analysis tool
