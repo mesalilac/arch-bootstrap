@@ -116,7 +116,7 @@ function fn_install_aur_packages {
 
 function fn_dependency_check {
     fn_log_info "Checking dependencies..."
-    fn_check_cmd "pipx"
+    fn_check_cmd "uv"
     fn_check_cmd "cargo"
     fn_check_cmd "curl"
     fn_check_cmd "go"
