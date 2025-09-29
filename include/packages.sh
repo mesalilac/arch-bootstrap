@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export PACMAN_PACKAGES=(
+    "base-devel"
     "firefox-developer-edition"   # Fast, Private & Safe Web Browser (Developer Edition)
     "git"                         # the fast distributed version control system
     "grim"                        # Screenshot utility for Wayland
