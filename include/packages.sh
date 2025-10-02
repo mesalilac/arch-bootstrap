@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export PACMAN_PACKAGES=(
+    "ruff"
     "base-devel"
     "firefox-developer-edition"   # Fast, Private & Safe Web Browser (Developer Edition)
     "git"                         # the fast distributed version control system
@@ -207,6 +208,7 @@ export PACMAN_PACKAGES=(
 )
 
 export AUR_PACKAGES=(
+    "ty-bin"
     "cartero-git"
     "cloudflare-warp-bin"
     "czkawka-gui-bin"
