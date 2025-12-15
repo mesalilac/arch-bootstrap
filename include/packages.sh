@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 export PACMAN_PACKAGES=(
-    "ruff"
-    "base-devel"
+    "ruff"                        # An extremely fast Python linter, written in Rust
+    "base-devel"                  # Basic tools to build Arch Linux packages
     "firefox-developer-edition"   # Fast, Private & Safe Web Browser (Developer Edition)
     "git"                         # the fast distributed version control system
     "grim"                        # Screenshot utility for Wayland
@@ -182,6 +182,7 @@ export PACMAN_PACKAGES=(
     "nodejs-lts-iron"             # Evented I/O for V8 javascript (LTS release
     "man-db"                      # A utility for reading man pages
     "docker"                      # Pack, ship and run any application as a lightweight container
+    "docker-compose"              # Fast, isolated development environments using Docker
     "dnsmasq"                     # Lightweight, easy to configure DNS forwarder and DHCP server
     "highlight"                   # Fast and flexible source code highlighter - CLI version
     "rsync"                       # A fast and versatile file copying tool for remote and local files
