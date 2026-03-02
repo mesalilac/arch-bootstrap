@@ -218,7 +218,6 @@ export AUR_PACKAGES=(
     "opentabletdriver"
     "adw-gtk3-git"
     "tmuxinator"
-    "exa"
     "diesel-cli"
     "cava"
     "pfetch"

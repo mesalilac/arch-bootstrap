@@ -158,6 +158,7 @@ function fn_install_cargo_packages {
     cargo install bat
     cargo install scout
     cargo install bacon
+    cargo install eza
     cargo install ripgrep
     cargo install fd-find
     cargo install --features lsp --locked taplo-cli
