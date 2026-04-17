@@ -36,7 +36,6 @@ export PACMAN_PACKAGES=(
     "waybar"                      # Highly customizable Wayland bar for Sway and Wlroots based compositors
     "wofi"                        # launcher for wlroots-based wayland compositors
     "psensor"                     # Graphical hardware temperature monitoring application
-    "wmenu"                       # Efficient dynamic menu for Wayland and wlroots based Wayland compositors
     "mesa"                        # Open-source OpenGL drivers
     "lib32-mesa"                  # Open-source OpenGL drivers - 32-bit
     "acpid"                       # A daemon for delivering ACPI power management events with netlink support
@@ -85,11 +84,6 @@ export PACMAN_PACKAGES=(
     #
     "pavucontrol"                 # PulseAudio Volume Control
     "pamixer"                     # Pulseaudio command-line mixer like amixer
-    #
-    # terminal
-    #
-    "alacritty"                   # A cross-platform, GPU-accelerated terminal emulator
-    "kitty"                       # A modern, hackable, featureful, OpenGL-based terminal emulator
     #
     # text editors
     #
@@ -218,12 +212,10 @@ export AUR_PACKAGES=(
     "opentabletdriver"
     "adw-gtk3-git"
     "tmuxinator"
-    "diesel-cli"
     "cava"
     "pfetch"
     "code-marketplace"
     "spaceship-prompt-git"
-    "gromit-mpx"
     "vtop"
     "selectdefaultapplication-git"
     "figma-linux"
